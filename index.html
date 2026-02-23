@@ -1,0 +1,1166 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Al-Amran Islamic Mediea | Menebar Hikmah, Membangun Generasi Robbani</title>
+    <!-- Font Awesome untuk Ikon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* =========================================
+           VARIABLE & RESET (CLEAN UI)
+           ========================================= */
+        :root {
+            --primary-color: #16a34a; /* Hijau Edukasi Modern */
+            --primary-dark: #15803d;
+            --primary-light: #dcfce7;
+            --text-main: #1f2937;
+            --text-muted: #4b5563;
+            --bg-body: #f9fafb;
+            --bg-white: #ffffff;
+            --border-color: #e5e7eb;
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.6;
+            font-size: 16px; /* Readability First */
+            overflow-x: hidden;
+        }
+
+        /* Typography limits for readability */
+        p {
+            max-width: 800px;
+            margin-bottom: 1rem;
+            color: var(--text-muted);
+        }
+
+        h1, h2, h3, h4 {
+            color: var(--text-main);
+            line-height: 1.3;
+            margin-bottom: 1rem;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* =========================================
+           LAYOUT & COMPONENTS
+           ========================================= */
+        .container {
+            width: 100%;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--primary-dark);
+        }
+
+        .section-subtitle {
+            text-align: center;
+            margin: 0 auto 50px auto;
+            font-size: 1.1rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 14px 28px;
+            border-radius: 8px;
+            font-weight: 600;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: var(--bg-white);
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--primary-light);
+        }
+
+        /* =========================================
+           NAVIGATION
+           ========================================= */
+        .navbar {
+            background-color: var(--bg-white);
+            box-shadow: var(--shadow-sm);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 15px 0;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo img {
+            height: 50px;
+        }
+
+        .logo-text {
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: var(--primary-dark);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-weight: 500;
+            color: var(--text-muted);
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--text-main);
+            cursor: pointer;
+        }
+
+        /* =========================================
+           HERO SECTION
+           ========================================= */
+        .hero {
+            background-color: var(--bg-white);
+            padding: 60px 0;
+        }
+
+        .hero-container {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .hero-content {
+            flex: 1;
+        }
+
+        .hero-content h1 {
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+        }
+
+        .hero-content p {
+            font-size: 1.15rem;
+            margin-bottom: 30px;
+        }
+
+        .hero-mentors {
+            margin-bottom: 30px;
+            padding: 15px;
+            background-color: var(--primary-light);
+            border-radius: 8px;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .hero-mentors p {
+            margin-bottom: 0;
+            font-size: 0.95rem;
+            color: var(--primary-dark);
+            font-weight: 600;
+        }
+
+        .hero-image {
+            flex: 1;
+        }
+
+        .hero-image img {
+            border-radius: 12px;
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* =========================================
+           BENEFITS SECTION
+           ========================================= */
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+        }
+
+        .benefit-card {
+            background: var(--bg-white);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: var(--shadow-md);
+            border-top: 4px solid var(--primary-color);
+            transition: transform 0.3s;
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .benefit-icon {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        .benefit-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+        }
+
+        .benefit-card ul {
+            list-style: none;
+            margin-left: 0;
+        }
+
+        .benefit-card ul li {
+            margin-bottom: 10px;
+            position: relative;
+            padding-left: 25px;
+            color: var(--text-muted);
+        }
+
+        .benefit-card ul li::before {
+            content: "\f00c"; /* FontAwesome check */
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            color: var(--primary-color);
+        }
+
+        /* =========================================
+           SYLLABUS (ACCORDION)
+           ========================================= */
+        .syllabus-section {
+            background-color: var(--bg-white);
+        }
+
+        .accordion {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .accordion-item {
+            margin-bottom: 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            overflow: hidden;
+            background-color: var(--bg-body);
+        }
+
+        .accordion-btn {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background: var(--bg-white);
+            border: none;
+            text-align: left;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-main);
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .accordion-btn:hover {
+            background-color: var(--primary-light);
+        }
+
+        .accordion-btn.active {
+            background-color: var(--primary-color);
+            color: var(--bg-white);
+        }
+
+        .accordion-btn.active .icon-toggle {
+            transform: rotate(180deg);
+        }
+
+        .icon-toggle {
+            transition: transform 0.3s;
+        }
+
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+            background-color: var(--bg-white);
+        }
+
+        .accordion-inner {
+            padding: 20px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .accordion-inner h4 {
+            color: var(--primary-dark);
+            margin-bottom: 10px;
+        }
+
+        .accordion-inner p {
+            margin-bottom: 0;
+        }
+
+        /* =========================================
+           SCHEDULE & ROUTINE
+           ========================================= */
+        .schedule-grid {
+            display: flex;
+            gap: 40px;
+            align-items: flex-start;
+        }
+
+        .schedule-image {
+            flex: 1;
+        }
+
+        .schedule-image img {
+            border-radius: 12px;
+            box-shadow: var(--shadow-md);
+            margin-bottom: 20px;
+        }
+
+        .routine-list {
+            flex: 1;
+            background: var(--bg-white);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: var(--shadow-md);
+        }
+
+        .routine-item {
+            display: flex;
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .routine-item:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .time {
+            font-weight: 700;
+            color: var(--primary-color);
+            width: 130px;
+            flex-shrink: 0;
+        }
+
+        .activity {
+            flex: 1;
+            color: var(--text-main);
+            font-weight: 500;
+        }
+
+        /* =========================================
+           MENTORS PROFILE
+           ========================================= */
+        .mentors-section {
+            background-color: var(--bg-white);
+        }
+
+        .mentors-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .mentor-card {
+            text-align: center;
+        }
+
+        .mentor-photo {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 20px auto;
+            border: 4px solid var(--primary-light);
+            background-color: var(--bg-body);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: var(--primary-color);
+        }
+
+        /* Gunakan gambar jika tersedia, jika tidak pakai ikon default */
+        .mentor-1 { background-image: url('https://image2url.com/r2/default/files/1771826178421-f0fac902-4842-43be-8d86-b6422fc19111.png'); background-size: cover; background-position: center; }
+        
+        .mentor-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+
+        .mentor-card p {
+            font-size: 0.9rem;
+            margin: 0 auto;
+        }
+
+        /* =========================================
+           PRICING SECTION
+           ========================================= */
+        .pricing-card {
+            max-width: 600px;
+            margin: 0 auto;
+            background: var(--bg-white);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--border-color);
+        }
+
+        .pricing-header {
+            background-color: var(--primary-color);
+            color: var(--bg-white);
+            padding: 30px;
+            text-align: center;
+        }
+
+        .pricing-header h3 {
+            color: var(--bg-white);
+            margin-bottom: 10px;
+        }
+
+        .price-amount {
+            font-size: 3rem;
+            font-weight: 700;
+        }
+
+        .price-discount {
+            display: inline-block;
+            background-color: #ffed4a;
+            color: #d97706;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            margin-top: 10px;
+        }
+
+        .pricing-body {
+            padding: 30px;
+        }
+
+        .price-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 30px;
+        }
+
+        .price-table th, .price-table td {
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border-color);
+            text-align: left;
+        }
+
+        .price-table th {
+            font-weight: 600;
+            color: var(--text-main);
+        }
+
+        .price-table td.amount {
+            text-align: right;
+            font-weight: 600;
+        }
+        
+        .price-table .note {
+            display: block;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            font-weight: normal;
+        }
+
+        .pricing-footer {
+            padding: 0 30px 30px 30px;
+            text-align: center;
+        }
+
+        .pricing-footer .btn {
+            width: 100%;
+            font-size: 1.1rem;
+            padding: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        /* =========================================
+           FAQ SECTION
+           ========================================= */
+        .faq-section {
+            background-color: var(--bg-body);
+        }
+
+        /* =========================================
+           FOOTER
+           ========================================= */
+        footer {
+            background-color: var(--text-main);
+            color: var(--bg-white);
+            padding: 60px 0 20px 0;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .footer-logo img {
+            height: 50px;
+            background: white;
+            padding: 5px;
+            border-radius: 8px;
+        }
+
+        .footer-logo span {
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+
+        .footer-about p {
+            color: #9ca3af;
+        }
+
+        .footer-links h4 {
+            color: var(--bg-white);
+            margin-bottom: 20px;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links ul li a {
+            color: #9ca3af;
+            transition: color 0.3s;
+        }
+
+        .footer-links ul li a:hover {
+            color: var(--primary-color);
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-icons a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #374151;
+            color: var(--bg-white);
+            transition: all 0.3s;
+        }
+
+        .social-icons a:hover {
+            background-color: var(--primary-color);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #374151;
+            color: #9ca3af;
+            font-size: 0.9rem;
+        }
+
+        /* =========================================
+           RESPONSIVE DESIGN (MOBILE FRIENDLY)
+           ========================================= */
+        @media (max-width: 992px) {
+            .hero-container, .schedule-grid {
+                flex-direction: column;
+            }
+            
+            .mentors-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none; /* Hide on mobile by default */
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: var(--bg-white);
+                flex-direction: column;
+                padding: 20px;
+                box-shadow: var(--shadow-md);
+                gap: 15px;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .benefits-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .mentors-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-content h1 {
+                font-size: 2.2rem;
+            }
+            
+            .price-amount {
+                font-size: 2.5rem;
+            }
+            
+            .routine-item {
+                flex-direction: column;
+            }
+            
+            .time {
+                margin-bottom: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="#" class="logo">
+                <img src="https://image2url.com/r2/default/files/1771826129740-4f19b90d-951e-4fb9-8ba7-b0528a6ff9fb.png" alt="Logo Al-Amran">
+                <span class="logo-text">Al-Amran Islamic Mediea</span>
+            </a>
+            
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#manfaat">Manfaat</a></li>
+                <li><a href="#kurikulum">Kurikulum</a></li>
+                <li><a href="#jadwal">Jadwal Harian</a></li>
+                <li><a href="#mentor">Asatidz</a></li>
+                <li><a href="#biaya">Pendaftaran</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <div class="container hero-container">
+            <div class="hero-content">
+                <h1>Menebar Hikmah, Membangun Generasi Robbani</h1>
+                <p>Bergabunglah dengan program intensif kami. Dapatkan bimbingan langsung untuk membentuk karakter spiritual, intelektual, dan skill yang siap menghadapi tantangan zaman.</p>
+                
+                <div class="hero-mentors">
+                    <p><i class="fas fa-chalkboard-teacher"></i> Dibimbing langsung oleh: Ustadz Amran, Ust Ocang, & Ust Fery (Fokus Adabul 'Alim)</p>
+                </div>
+                
+                <a href="https://wa.me/6281241511156?text=Halo%20Admin%20Al-Amran,%20saya%20ingin%20konsultasi%20pendaftaran%20santri%20baru" target="_blank" class="btn btn-primary">
+                    <i class="fab fa-whatsapp"></i> Daftar Sekarang
+                </a>
+            </div>
+            <div class="hero-image">
+                <img src="https://image2url.com/r2/default/files/1771826160034-649cba92-d5fb-452e-8aef-5258df91ed5a.png" alt="Banner Al-Amran Islamic Mediea">
+            </div>
+        </div>
+    </section>
+
+    <!-- BENEFITS SECTION -->
+    <section id="manfaat" class="section">
+        <div class="container">
+            <h2 class="section-title">Hasil Nyata Setelah Lulus</h2>
+            <p class="section-subtitle">Fokus pada perubahan kualitas diri santri secara holistik.</p>
+            
+            <div class="benefits-grid">
+                <!-- Benefit 1 -->
+                <div class="benefit-card">
+                    <div class="benefit-icon"><i class="fas fa-heart"></i></div>
+                    <h3>Manfaat Spiritual</h3>
+                    <ul>
+                        <li><strong>Hati yang Terbimbing:</strong> Kebiasaan ibadah mandiri (Tahajud, Dhuha, Zikir) tanpa paksaan.</li>
+                        <li><strong>Kekuatan Hafalan:</strong> Simpanan ayat suci Al-Qur'an di dada sebagai pedoman hidup selamanya.</li>
+                    </ul>
+                </div>
+                
+                <!-- Benefit 2 -->
+                <div class="benefit-card">
+                    <div class="benefit-icon"><i class="fas fa-book-open"></i></div>
+                    <h3>Manfaat Intelektual</h3>
+                    <ul>
+                        <li><strong>Literasi Kitab Turats:</strong> Mampu membedah persoalan agama langsung dari kitab ulama terdahulu.</li>
+                        <li><strong>Kritis & Solutif:</strong> Terbiasa berdiskusi kritis isu kontemporer dari sudut pandang Islam.</li>
+                    </ul>
+                </div>
+                
+                <!-- Benefit 3 -->
+                <div class="benefit-card">
+                    <div class="benefit-icon"><i class="fas fa-microphone-alt"></i></div>
+                    <h3>Manfaat Skill Siap Pakai</h3>
+                    <ul>
+                        <li><strong>Mahir Public Speaking:</strong> Percaya diri tampil sebagai imam maupun orator/pendakwah.</li>
+                        <li><strong>Kecakapan Media:</strong> Mengoperasikan media digital untuk dakwah profesional.</li>
+                    </ul>
+                </div>
+                
+                <!-- Benefit 4 -->
+                <div class="benefit-card">
+                    <div class="benefit-icon"><i class="fas fa-users"></i></div>
+                    <h3>Manfaat Sosial & Karakter</h3>
+                    <ul>
+                        <li><strong>Kemandirian:</strong> Terbiasa mengurus diri sendiri dan disiplin waktu sejak dini.</li>
+                        <li><strong>Jejaring Alumni:</strong> Tergabung dalam ukhuwah ikatan alumni yang kuat dan saling mendukung.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SYLLABUS SECTION -->
+    <section id="kurikulum" class="section syllabus-section">
+        <div class="container">
+            <h2 class="section-title">Struktur Kurikulum</h2>
+            <p class="section-subtitle">Integrasi ilmu agama klasik dan keahlian modern.</p>
+            
+            <div class="accordion">
+                <!-- Bab 1 -->
+                <div class="accordion-item">
+                    <button class="accordion-btn">
+                        <span>1. Tahfidz Al-Qur'an</span>
+                        <i class="fas fa-chevron-down icon-toggle"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="accordion-inner">
+                            <h4>Materi Utama:</h4>
+                            <p>Ziyadah, Murojaah, dan Tahsin (Menggunakan Metode Ustadz Amran).</p>
+                            <br>
+                            <h4>Output Santri:</h4>
+                            <p>Hafal 30 Juz dengan tajwid yang fasih dan mutqin.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bab 2 -->
+                <div class="accordion-item">
+                    <button class="accordion-btn">
+                        <span>2. Kajian Kitab Kuning</span>
+                        <i class="fas fa-chevron-down icon-toggle"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="accordion-inner">
+                            <h4>Materi Utama:</h4>
+                            <p>Nahwu, Shorof, Fiqh (Fathul Qarib), dan Akhlak (Adabul 'Alim).</p>
+                            <br>
+                            <h4>Output Santri:</h4>
+                            <p>Mampu membaca, mengartikan, dan memahami literatur klasik (kitab gundul).</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bab 3 -->
+                <div class="accordion-item">
+                    <button class="accordion-btn">
+                        <span>3. Dakwah & Digital</span>
+                        <i class="fas fa-chevron-down icon-toggle"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="accordion-inner">
+                            <h4>Materi Utama:</h4>
+                            <p>Public Speaking, Videografi Dakwah, dan Jurnalistik Islam.</p>
+                            <br>
+                            <h4>Output Santri:</h4>
+                            <p>Mampu berdakwah secara langsung di mimbar dan memproduksi konten kebaikan di media sosial.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bab 4 -->
+                <div class="accordion-item">
+                    <button class="accordion-btn">
+                        <span>4. Bahasa Asing</span>
+                        <i class="fas fa-chevron-down icon-toggle"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="accordion-inner">
+                            <h4>Materi Utama:</h4>
+                            <p>Intensif Bahasa Arab & Bahasa Inggris.</p>
+                            <br>
+                            <h4>Output Santri:</h4>
+                            <p>Komunikasi aktif dalam dua bahasa internasional untuk persiapan studi ke luar negeri atau dakwah global.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SCHEDULE SECTION -->
+    <section id="jadwal" class="section">
+        <div class="container">
+            <h2 class="section-title">Jadwal Harian (Daily Routine)</h2>
+            <p class="section-subtitle">Transparansi aktivitas pembentukan karakter kedisiplinan santri setiap harinya.</p>
+
+            <div class="schedule-grid">
+                <div class="schedule-image">
+                    <img src="https://image2url.com/r2/default/files/1771826228595-e2082f51-ccd8-450a-96dd-e5b5d51a3902.png" alt="Aktivitas Santri">
+                    <img src="https://image2url.com/r2/default/files/1771826203359-8dc592a2-04b0-44e3-ac31-25f907f768cd.png" alt="Depan Mesjid">
+                </div>
+                
+                <div class="routine-list">
+                    <div class="routine-item">
+                        <div class="time">04:00 - 05:30</div>
+                        <div class="activity">Qiyamul Lail, Subuh Berjamaah, & Zikir Pagi.</div>
+                    </div>
+                    <div class="routine-item">
+                        <div class="time">06:00 - 07:30</div>
+                        <div class="activity">Halaqah Tahfidz Pagi.</div>
+                    </div>
+                    <div class="routine-item">
+                        <div class="time">08:00 - 13:00</div>
+                        <div class="activity">Sekolah Formal (KBM Nasional).</div>
+                    </div>
+                    <div class="routine-item">
+                        <div class="time">14:00 - 15:30</div>
+                        <div class="activity">Pendalaman Kitab Turats bersama Ustadz Amran.</div>
+                    </div>
+                    <div class="routine-item">
+                        <div class="time">16:00 - 17:30</div>
+                        <div class="activity">Olahraga & Ekstrakurikuler (Memanah, Berkuda, atau IT).</div>
+                    </div>
+                    <div class="routine-item">
+                        <div class="time">Ba'da Maghrib</div>
+                        <div class="activity">Kajian Tafsir & Muhadharah (Latihan Pidato).</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MENTORS SECTION -->
+    <section id="mentor" class="section mentors-section">
+        <div class="container">
+            <h2 class="section-title">Profil Pengajar (Asatidz)</h2>
+            <p class="section-subtitle">Dibimbing oleh tenaga pendidik berpengalaman.</p>
+
+            <div class="mentors-grid">
+                <div class="mentor-card">
+                    <!-- Foto Ustadz Amran -->
+                    <div class="mentor-photo mentor-1"></div>
+                    <h3>Ustadz Amran</h3>
+                    <p>Pakar Tahsin & Kitab Turats</p>
+                </div>
+                <div class="mentor-card">
+                    <!-- Placeholder untuk ustadz lain karena tidak ada URL spesifik -->
+                    <div class="mentor-photo"><i class="fas fa-user"></i></div>
+                    <h3>Ustadz Ocang</h3>
+                    <p>Pembimbing Karakter & Keilmuan</p>
+                </div>
+                <div class="mentor-card">
+                    <div class="mentor-photo"><i class="fas fa-user"></i></div>
+                    <h3>Ustadz Fery</h3>
+                    <p>Pembina Ekstrakurikuler & Dakwah</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRICING SECTION -->
+    <section id="biaya" class="section">
+        <div class="container">
+            <h2 class="section-title">Biaya Pendidikan</h2>
+            <p class="section-subtitle">Biaya yang terjangkau untuk fasilitas dan kualitas pendidikan terbaik.</p>
+
+            <div class="pricing-card">
+                <div class="pricing-header">
+                    <h3>Total Awal Pendaftaran</h3>
+                    <div class="price-amount">Rp 11.000.000</div>
+                    <div class="price-discount">Di luar biaya pendaftaran / Tersedia Diskon 75%*</div>
+                </div>
+                <div class="pricing-body">
+                    <table class="price-table">
+                        <tr>
+                            <th>Infaq Pangkal <span class="note">Pembangunan & Sarana (Sekali bayar)</span></th>
+                            <td class="amount">Rp 7.500.000</td>
+                        </tr>
+                        <tr>
+                            <th>Bulanan (SPP) <span class="note">Makan 3x, Asrama, & Pendidikan</span></th>
+                            <td class="amount">Rp 1.500.000</td>
+                        </tr>
+                        <tr>
+                            <th>Seragam & Kitab <span class="note">Paket 5 stel seragam & buku pegangan</span></th>
+                            <td class="amount">Rp 2.000.000</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="pricing-footer">
+                    <a href="https://wa.me/6281241511156?text=Halo%20Admin%20Al-Amran,%20saya%20tertarik%20mendaftar%20dan%20ingin%20bertanya%20mengenai%20Diskon%2075%25" target="_blank" class="btn btn-primary">
+                        <i class="fab fa-whatsapp"></i> Hubungi via WhatsApp Sekarang
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ SECTION -->
+    <section id="faq" class="section faq-section">
+        <div class="container">
+            <h2 class="section-title">Pertanyaan Umum (FAQ)</h2>
+            <p class="section-subtitle">Beberapa hal yang sering ditanyakan oleh calon wali santri.</p>
+            
+            <div class="accordion">
+                <div class="accordion-item">
+                    <button class="accordion-btn">
+                        <span>Apakah lulusan pesantren ijazahnya diakui negara?</span>
+                        <i class="fas fa-chevron-down icon-toggle"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="accordion-inner">
+                            <p>Ya, santri tetap mengikuti Kegiatan Belajar Mengajar (KBM) Nasional sesuai jadwal pagi, sehingga berhak mendapatkan ijazah formal yang diakui pemerintah untuk melanjutkan pendidikan ke jenjang universitas.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <button class="accordion-btn">
+                        <span>Bagaimana cara mendapatkan diskon 75%?</span>
+                        <i class="fas fa-chevron-down icon-toggle"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="accordion-inner">
+                            <p>Diskon pendaftaran berlaku untuk periode tertentu dan syarat khusus (seperti jalur prestasi hafalan/akademik). Silakan hubungi admin kami melalui tombol WhatsApp untuk informasi kuota promo terbaru.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <button class="accordion-btn">
+                        <span>Apakah boleh membawa alat elektronik / HP?</span>
+                        <i class="fas fa-chevron-down icon-toggle"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="accordion-inner">
+                            <p>Untuk menjaga fokus hafalan dan ibadah, santri tidak diperkenankan membawa HP secara bebas. Akses ke media digital dan komputer hanya diperbolehkan saat jam pelajaran "Dakwah & Digital" di bawah pengawasan asatidz.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-about">
+                    <div class="footer-logo">
+                        <img src="https://image2url.com/r2/default/files/1771826129740-4f19b90d-951e-4fb9-8ba7-b0528a6ff9fb.png" alt="Logo">
+                        <span>Al-Amran Islamic Mediea</span>
+                    </div>
+                    <p>Menebar Hikmah, Membangun Generasi Robbani. Pesantren modern dengan perpaduan metode salaf (kitab turats), tahfidz, dan keahlian digital masa kini.</p>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Tautan Navigasi</h4>
+                    <ul>
+                        <li><a href="#manfaat">Keunggulan & Manfaat</a></li>
+                        <li><a href="#kurikulum">Silabus Kurikulum</a></li>
+                        <li><a href="#jadwal">Jadwal Harian</a></li>
+                        <li><a href="#biaya">Biaya Pendidikan</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Hubungi Kami</h4>
+                    <ul>
+                        <li><i class="fas fa-phone-alt"></i> 0812-4151-1156</li>
+                        <li><i class="fab fa-whatsapp"></i> Chat WhatsApp Aktif</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Kampus Al-Amran</li>
+                    </ul>
+                    <div class="social-icons">
+                        <a href="https://wa.me/6281241511156" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                        <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" title="YouTube"><i class="fab fa-youtube"></i></a>
+                        <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2026 Al-Amran Islamic Mediea. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            
+            // 1. MOBILE MENU TOGGLE
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const navLinks = document.getElementById('navLinks');
+            
+            mobileMenuBtn.addEventListener('click', function() {
+                navLinks.classList.toggle('active');
+            });
+
+            // Close mobile menu when a link is clicked
+            const links = navLinks.querySelectorAll('a');
+            links.forEach(link => {
+                link.addEventListener('click', () => {
+                    navLinks.classList.remove('active');
+                });
+            });
+
+            // 2. ACCORDION LOGIC
+            const accordions = document.querySelectorAll('.accordion-btn');
+
+            accordions.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    // Toggle the active class on the button
+                    this.classList.toggle('active');
+
+                    // Get the next element (the content div)
+                    const content = this.nextElementSibling;
+
+                    // Toggle max-height for slide down/up effect
+                    if (content.style.maxHeight) {
+                        // If it's open, close it
+                        content.style.maxHeight = null;
+                    } else {
+                        // If it's closed, open it by setting max-height to its scrollHeight
+                        content.style.maxHeight = content.scrollHeight + "px";
+                        
+                        // Optional: Close other open accordions in the same group
+                        /*
+                        const allContents = document.querySelectorAll('.accordion-content');
+                        const allBtns = document.querySelectorAll('.accordion-btn');
+                        
+                        allContents.forEach((c, index) => {
+                            if(c !== content) {
+                                c.style.maxHeight = null;
+                                allBtns[index].classList.remove('active');
+                            }
+                        });
+                        */
+                    }
+                });
+            });
+
+            // 3. SMOOTH SCROLLING FOR NAVIGATION LINKS
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    
+                    if(targetElement) {
+                        // Offset for fixed navbar height
+                        const headerOffset = 80;
+                        const elementPosition = targetElement.getBoundingClientRect().top;
+                        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+        
+                        window.scrollTo({
+                            top: offsetPosition,
+                            behavior: "smooth"
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
