@@ -6,6 +6,8 @@
     <title>Al-Amran Islamic Mediea | Menebar Hikmah, Membangun Generasi Robbani</title>
     <!-- Font Awesome untuk Ikon -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Supabase JS CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <style>
         /* =========================================
            VARIABLE & RESET (CLEAN UI)
@@ -161,8 +163,9 @@
 
         .nav-links {
             display: flex;
-            gap: 25px;
+            gap: 20px;
             list-style: none;
+            align-items: center;
         }
 
         .nav-links a {
@@ -736,7 +739,21 @@
                 <li><a href="#kurikulum">Kurikulum</a></li>
                 <li><a href="#jadwal">Jadwal Harian</a></li>
                 <li><a href="#mentor">Asatidz</a></li>
-                <li><a href="#biaya">Pendaftaran</a></li>
+                <li><a href="#form-daftar" style="color: var(--primary-color); font-weight: 700;">Daftar Online</a></li>
+                
+                <!-- LOGIN / PROFIL BUTTONS -->
+                <li id="loginNav">
+                    <button id="btnLogin" class="btn btn-outline" style="padding: 8px 15px; font-size: 0.9rem; border-radius: 20px; display: flex; align-items: center; gap: 8px;">
+                        <i class="fab fa-google"></i> Masuk
+                    </button>
+                </li>
+                <li id="userNav" style="display: none; align-items: center; gap: 10px;">
+                    <img id="userAvatar" src="" alt="Profile" style="width: 35px; height: 35px; border-radius: 50%; object-fit: cover; border: 2px solid var(--primary-color);">
+                    <div style="display: flex; flex-direction: column; line-height: 1.2;">
+                        <span id="userName" style="font-weight: 600; font-size: 0.85rem; color: var(--text-main);"></span>
+                        <a href="#" id="btnLogout" style="color: #ef4444; font-size: 0.75rem; font-weight: 500;">Keluar</a>
+                    </div>
+                </li>
             </ul>
         </div>
     </nav>
@@ -963,7 +980,7 @@
     <!-- PRICING SECTION -->
     <section id="biaya" class="section">
         <div class="container">
-            <h2 class="section-title">Biaya Pendidikan</h2>
+            <h2 class="section-title">Investasi Pendidikan</h2>
             <p class="section-subtitle">Biaya yang terjangkau untuk fasilitas dan kualitas pendidikan terbaik.</p>
 
             <div class="pricing-card">
@@ -993,6 +1010,35 @@
                         <i class="fab fa-whatsapp"></i> Hubungi via WhatsApp Sekarang
                     </a>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FORM PENDAFTARAN ONLINE (SUPABASE INTEGRATION) -->
+    <section id="form-daftar" class="section" style="background-color: var(--primary-light);">
+        <div class="container">
+            <h2 class="section-title">Formulir Pendaftaran Online</h2>
+            <p class="section-subtitle">Isi data di bawah ini. Data Anda akan langsung tersimpan aman di sistem database kami.</p>
+            
+            <div style="max-width: 600px; margin: 0 auto; background: var(--bg-white); padding: 40px; border-radius: 12px; box-shadow: var(--shadow-lg);">
+                <form id="supabaseForm">
+                    <div style="margin-bottom: 20px;">
+                        <label for="namaLengkap" style="display: block; margin-bottom: 8px; font-weight: 600;">Nama Lengkap Calon Santri</label>
+                        <input type="text" id="namaLengkap" required placeholder="Masukkan nama lengkap..." style="width: 100%; padding: 12px; border: 1px solid var(--border-color); border-radius: 8px; font-size: 1rem;">
+                    </div>
+                    <div style="margin-bottom: 20px;">
+                        <label for="noWA" style="display: block; margin-bottom: 8px; font-weight: 600;">Nomor WhatsApp</label>
+                        <input type="tel" id="noWA" required placeholder="Contoh: 081241511156" style="width: 100%; padding: 12px; border: 1px solid var(--border-color); border-radius: 8px; font-size: 1rem;">
+                    </div>
+                    <div style="margin-bottom: 30px;">
+                        <label for="asalSekolah" style="display: block; margin-bottom: 8px; font-weight: 600;">Asal Sekolah (SD/SMP)</label>
+                        <input type="text" id="asalSekolah" required placeholder="Masukkan asal sekolah..." style="width: 100%; padding: 12px; border: 1px solid var(--border-color); border-radius: 8px; font-size: 1rem;">
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%; font-size: 1.1rem; padding: 15px;">
+                        <i class="fas fa-paper-plane"></i> Kirim Data Pendaftaran
+                    </button>
+                    <div id="formMessage" style="margin-top: 15px; text-align: center; font-weight: 600; display: none; padding: 10px; border-radius: 8px;"></div>
+                </form>
             </div>
         </div>
     </section>
@@ -1087,7 +1133,7 @@
 
     <!-- JAVASCRIPT -->
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', async function() {
             
             // 1. MOBILE MENU TOGGLE
             const mobileMenuBtn = document.getElementById('mobileMenuBtn');
@@ -1110,32 +1156,12 @@
 
             accordions.forEach(btn => {
                 btn.addEventListener('click', function() {
-                    // Toggle the active class on the button
                     this.classList.toggle('active');
-
-                    // Get the next element (the content div)
                     const content = this.nextElementSibling;
-
-                    // Toggle max-height for slide down/up effect
                     if (content.style.maxHeight) {
-                        // If it's open, close it
                         content.style.maxHeight = null;
                     } else {
-                        // If it's closed, open it by setting max-height to its scrollHeight
                         content.style.maxHeight = content.scrollHeight + "px";
-                        
-                        // Optional: Close other open accordions in the same group
-                        /*
-                        const allContents = document.querySelectorAll('.accordion-content');
-                        const allBtns = document.querySelectorAll('.accordion-btn');
-                        
-                        allContents.forEach((c, index) => {
-                            if(c !== content) {
-                                c.style.maxHeight = null;
-                                allBtns[index].classList.remove('active');
-                            }
-                        });
-                        */
                     }
                 });
             });
@@ -1148,7 +1174,6 @@
                     const targetElement = document.querySelector(targetId);
                     
                     if(targetElement) {
-                        // Offset for fixed navbar height
                         const headerOffset = 80;
                         const elementPosition = targetElement.getBoundingClientRect().top;
                         const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
@@ -1160,6 +1185,120 @@
                     }
                 });
             });
+
+            // 4. SUPABASE INTEGRATION LOGIC (Formulir & Google Auth)
+            const supabaseUrl = 'https://tdhsjbehqftgxddeaqnn.supabase.co';
+            const supabaseKey = 'sb_publishable_Xcykhzbiy-eJBIBolfRTSQ_-0JsFtgS';
+            const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
+
+            // === A. GOOGLE AUTHENTICATION LOGIC ===
+            const btnLogin = document.getElementById('btnLogin');
+            const btnLogout = document.getElementById('btnLogout');
+            const loginNav = document.getElementById('loginNav');
+            const userNav = document.getElementById('userNav');
+            const userAvatar = document.getElementById('userAvatar');
+            const userName = document.getElementById('userName');
+
+            // Fungsi untuk update tampilan UI berdasarkan status login
+            function updateAuthUI(session) {
+                if (session) {
+                    // Jika user login, tampilkan profil dan sembunyikan tombol login
+                    loginNav.style.display = 'none';
+                    userNav.style.display = 'flex';
+                    
+                    // Ambil data metadata dari Google
+                    const userMeta = session.user.user_metadata;
+                    userName.textContent = userMeta.full_name || 'Santri Baru';
+                    userAvatar.src = userMeta.avatar_url || 'https://ui-avatars.com/api/?name=' + (userMeta.full_name || 'Santri');
+                } else {
+                    // Jika user logout, tampilkan tombol login
+                    loginNav.style.display = 'block';
+                    userNav.style.display = 'none';
+                }
+            }
+
+            // Cek sesi aktif saat halaman dimuat
+            const { data: { session } } = await supabase.auth.getSession();
+            updateAuthUI(session);
+
+            // Listener untuk memantau perubahan status autentikasi (Login/Logout)
+            supabase.auth.onAuthStateChange((_event, session) => {
+                updateAuthUI(session);
+            });
+
+            // Event Listener untuk Tombol Login Google
+            if (btnLogin) {
+                btnLogin.addEventListener('click', async (e) => {
+                    e.preventDefault();
+                    const { error } = await supabase.auth.signInWithOAuth({
+                        provider: 'google',
+                        options: {
+                            redirectTo: window.location.origin
+                        }
+                    });
+                    if (error) {
+                        console.error('Error Login:', error.message);
+                        alert('Gagal login dengan Google: ' + error.message);
+                    }
+                });
+            }
+
+            // Event Listener untuk Tombol Logout
+            if (btnLogout) {
+                btnLogout.addEventListener('click', async (e) => {
+                    e.preventDefault();
+                    const { error } = await supabase.auth.signOut();
+                    if (error) console.error('Error Logout:', error.message);
+                });
+            }
+
+
+            // === B. SUBMIT FORMULIR PENDAFTARAN LOGIC ===
+            const pendaftaranForm = document.getElementById('supabaseForm');
+            const formMessage = document.getElementById('formMessage');
+
+            if (pendaftaranForm) {
+                pendaftaranForm.addEventListener('submit', async function(e) {
+                    e.preventDefault();
+                    
+                    const btnSubmit = this.querySelector('button[type="submit"]');
+                    const originalBtnText = btnSubmit.innerHTML;
+                    
+                    btnSubmit.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sedang Menyimpan...';
+                    btnSubmit.disabled = true;
+                    formMessage.style.display = 'none';
+
+                    const nama = document.getElementById('namaLengkap').value;
+                    const wa = document.getElementById('noWA').value;
+                    const sekolah = document.getElementById('asalSekolah').value;
+
+                    try {
+                        const { data, error } = await supabase
+                            .from('pendaftaran_santri')
+                            .insert([
+                                { nama_lengkap: nama, nomor_wa: wa, asal_sekolah: sekolah }
+                            ]);
+
+                        if (error) throw error;
+
+                        formMessage.style.display = 'block';
+                        formMessage.style.backgroundColor = '#dcfce7'; 
+                        formMessage.style.color = 'var(--primary-dark)';
+                        formMessage.innerHTML = '<i class="fas fa-check-circle"></i> Alhamdulillah, data pendaftaran berhasil dikirim!';
+                        pendaftaranForm.reset();
+
+                    } catch (error) {
+                        console.error('Supabase Error:', error.message);
+                        formMessage.style.display = 'block';
+                        formMessage.style.backgroundColor = '#fee2e2'; 
+                        formMessage.style.color = '#dc2626'; 
+                        formMessage.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Terjadi kesalahan: ' + error.message;
+                    } finally {
+                        btnSubmit.innerHTML = originalBtnText;
+                        btnSubmit.disabled = false;
+                    }
+                });
+            }
         });
     </script>
 </body>
